@@ -1,7 +1,21 @@
-import path from 'path';
+import path from "path";
 
-const rootDirectory = path.resolve('..');
+const rootDirectory = path.resolve("");
 
-const focosDirectory = path.resolve(rootDirectory, 'dataset', 'focos');
+const focosDirectory = path.resolve(rootDirectory, "..", "dataset", "focos");
 
-export { rootDirectory, focosDirectory };
+const satelitesDirectoy = path.resolve(
+  rootDirectory,
+  "..",
+  "dataset",
+  "satelites"
+);
+
+const outputDirectory = path.resolve(
+  rootDirectory,
+  "..",
+  "dataset",
+  "mergedData"
+);
+
+export { rootDirectory, focosDirectory, satelitesDirectoy, outputDirectory };
