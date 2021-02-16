@@ -10,23 +10,9 @@ import pandas as pd
 import math
 
 
-#separação da data
-def meses(df): 
-    for i in range(len(df)):
-        ver = df.loc[i ,'Data Medicao'].split('-')
-        df.loc[i, 'ANO'] = ver[0]
-        df.loc[i, 'MES'] = ver[1]
-        df.loc[i, 'DIA'] = ver[2]
-    df.drop(columns=['Data Medicao'], inplace=True)
-
-
 #leitura dados
 df_lencois = pd.read_csv('.//dataset//meteorologia//dados_Lencois.csv')
 df_piata = pd.read_csv('.//dataset//meteorologia//dados_Piata.csv')
-
-#chamando função meses
-meses(df_lencois)
-meses(df_piata)
 
 #exibir quantidade de valores nulos em cada atributo
 df_lencois.isnull().sum() 
@@ -60,8 +46,8 @@ def tratamento(df):
     df['TEMPERATURA MEDIA; DIARIA (AUT)(Â°C)'].fillna(temperatura_media, inplace=True)
     df['UMIDADE RELATIVA DO AR; MEDIA DIARIA (AUT)(%)'].fillna(umidade_media, inplace=True)
     df['VENTO; VELOCIDADE MEDIA DIARIA (AUT)(m/s)'].fillna(vento_media, inplace=True)
-
-
+    
+    
 tratamento(df_lencois)
 tratamento(df_piata)
 
