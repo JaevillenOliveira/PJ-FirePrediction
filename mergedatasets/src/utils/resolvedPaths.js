@@ -4,14 +4,7 @@ const rootDirectory = path.resolve("");
 
 const focosDirectory = path.resolve(rootDirectory, "..", "dataset", "focos");
 
-const metereologiaDirectory = path.resolve(rootDirectory, "..", "dataset", "metereologia");
-
-const satelitesDirectoy = path.resolve(
-  rootDirectory,
-  "..",
-  "dataset",
-  "satelites"
-);
+const metereologiaDirectory = path.resolve(rootDirectory, "..", "dataset", "meteorologia");
 
 const outputDirectory = path.resolve(
   rootDirectory,
@@ -20,4 +13,6 @@ const outputDirectory = path.resolve(
   "mergedData"
 );
 
-export { rootDirectory, focosDirectory, satelitesDirectoy, outputDirectory };
+const resolvedWorkerCiclePath = path.resolve(rootDirectory, "src", "infra", "workerCicle.js")
+
+export { focosDirectory, metereologiaDirectory, outputDirectory, resolvedWorkerCiclePath };
