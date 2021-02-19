@@ -27,7 +27,7 @@ async function run(){
 
       let newRow = ``
 
-      if(date > `2016` && date < `2020`){
+      if(date > `2016` && date < `2021`){
         newRow = JSON.stringify({
           ...row,
           has_Foco: has_Foco ? 1 : 0
