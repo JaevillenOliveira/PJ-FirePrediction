@@ -31,5 +31,3 @@ async function parseData(){
 }
 
 parseData()
-
-// const dict = await metereologyToDict(metereologiaDirectory)

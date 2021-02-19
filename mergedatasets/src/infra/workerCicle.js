@@ -25,11 +25,16 @@ async function run(){
         has_Foco = true;
       }
 
-      return next(null,
-        JSON.stringify({
+      let newRow = ``
+
+      if(date > `2016` && date < `2020`){
+        newRow = JSON.stringify({
           ...row,
           has_Foco: has_Foco ? 1 : 0
-        }))
+        })
+      }
+
+      return next(null, newRow)
         
     })
     .pipe(jsontocsv())
