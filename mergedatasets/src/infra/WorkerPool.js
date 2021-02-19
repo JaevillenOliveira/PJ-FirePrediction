@@ -13,11 +13,19 @@ class WorkerPool {
       this.pool.acquire(filename, { workerData }, (err, worker) => {
         if (err) throw err;
         console.log(`started worker (pool size: ${this.pool.size})`);
-        worker.on("message", resolve);
+        worker.on("message", (message) => {
+          resolve(message)
+        });
         worker.on("error", reject);
       });
     });
   }
+
+  finish(){
+    this.pool.destroy()
+  }
+
+
 }
 
 export default WorkerPool;

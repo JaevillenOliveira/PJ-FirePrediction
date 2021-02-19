@@ -1,25 +1,32 @@
-import { resolvedWorkerCiclePath, metereologiaDirectory, focosDirectory} from './utils/resolvedPaths.js'
+import { resolvedWorkerCiclePath, focosDirectory, outputDirectory, metereologiaDirectory} from './utils/resolvedPaths.js'
 import WorkerPool from './infra/WorkerPool.js'
-import { arrayFocos } from './utils/arrayFocos.js'
+import { arrayCurrentOutput, arrayDir } from './utils/arrayFocos.js'
 
 
 async function parseData(){
+  console.time('parse-data');
   const cpu_len = 3
   const wp = new WorkerPool(cpu_len)
 
-  const focosPaths = await arrayFocos(focosDirectory)
+  const focosPaths = await arrayDir(focosDirectory)
 
-  wp.runPool(resolvedWorkerCiclePath, {
-      metereologiaDirectory,
-      foco: focosPaths[0],
-  });
+  const dados = await arrayCurrentOutput(metereologiaDirectory, outputDirectory)
+  let promises = []
 
-  // for (foco of focosPaths) {
-  //   await wp.runPool(resolvedWorkerCiclePath, {
-  //     dictPath: metereologiaDirectory,
-  //     directory: foco,
-  //   });
-  // }
+  dados.forEach((dado) => {
+
+    let pool = wp.runPool(resolvedWorkerCiclePath, {
+        focosPaths,
+        dado
+      });
+
+    promises.push(pool)
+  })
+
+  Promise.all(promises).then((message) => {
+    console.log(message);
+    console.timeEnd('parse-data')
+  })
 
 }
 
