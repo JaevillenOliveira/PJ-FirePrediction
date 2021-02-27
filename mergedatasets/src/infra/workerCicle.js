@@ -28,8 +28,12 @@ async function run(){
       let newRow = ``
 
       if(date > `2016` && date < `2021`){
+        let [,mes, dia] = row['Data Medicao'].split('-')
         newRow = JSON.stringify({
-          ...row,
+          'Data Medicao': `${dia}/${mes}`,
+          'TEMPERATURA MEDIA; DIARIA (AUT)(Â°C)': row['TEMPERATURA MEDIA; DIARIA (AUT)(Â°C)'],
+          'UMIDADE RELATIVA DO AR; MEDIA DIARIA (AUT)(%)': row['UMIDADE RELATIVA DO AR; MEDIA DIARIA (AUT)(%)'],
+          'VENTO; VELOCIDADE MEDIA DIARIA (AUT)(m/s)': row['VENTO; VELOCIDADE MEDIA DIARIA (AUT)(m/s)'],
           has_Foco: has_Foco ? 1 : 0
         })
       }
