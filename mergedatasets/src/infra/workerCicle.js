@@ -31,9 +31,9 @@ async function run(){
         let [,mes, dia] = row['Data Medicao'].split('-')
         newRow = JSON.stringify({
           'Data Medicao': `${dia}/${mes}`,
+          'PRECIPITACAO TOTAL; DIARIO (AUT)(mm)': row['PRECIPITACAO TOTAL; DIARIO (AUT)(mm)'],
           'TEMPERATURA MEDIA; DIARIA (AUT)(Â°C)': row['TEMPERATURA MEDIA; DIARIA (AUT)(Â°C)'],
           'UMIDADE RELATIVA DO AR; MEDIA DIARIA (AUT)(%)': row['UMIDADE RELATIVA DO AR; MEDIA DIARIA (AUT)(%)'],
-          'VENTO; VELOCIDADE MEDIA DIARIA (AUT)(m/s)': row['VENTO; VELOCIDADE MEDIA DIARIA (AUT)(m/s)'],
           has_Foco: has_Foco ? 1 : 0
         })
       }
