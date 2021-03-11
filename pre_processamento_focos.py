@@ -2,13 +2,14 @@ import pandas as pd
 import numpy as np
 
 #Change this variable to your directory path
-path = '/home/jaevillen/IEEE/PJ-FirePrediction/'
+path = '/home/jaevillen/IEEE/PJ-FirePrediction/dataset/focos/'
 
 file_names = [
     path+'Focos_2016-01-01_2016-12-31.csv',
     path+'Focos_2017-01-01_2017-12-31.csv',
     path+'Focos_2018-01-01_2018-12-31.csv',
     path+'Focos_2019-01-01_2019-12-31.csv',
+    path+'Focos_2020-01-01_2020-12-31.csv',
 ]
 
 # Remove linhas que não foram originadas pelo satélite de referência AQUA_M-T
@@ -49,5 +50,5 @@ def formatDate():
         focos.to_csv(file, index=False) 
 
 selectCities()
-selectSatelite()
+# selectSatelite()
 formatDate()
