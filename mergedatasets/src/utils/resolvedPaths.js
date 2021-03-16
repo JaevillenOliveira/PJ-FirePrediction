@@ -2,7 +2,7 @@ import path from "path";
 
 const rootDirectory = path.resolve("");
 
-const focosDirectory = path.resolve(rootDirectory, "..", "dataset", "focos");
+const focosDirectory = path.resolve(rootDirectory, "..", "dataset", "focos", "FireSpotsByReferenceSatelite");
 
 const metereologiaDirectory = path.resolve(rootDirectory, "..", "dataset", "meteorologia");
 
