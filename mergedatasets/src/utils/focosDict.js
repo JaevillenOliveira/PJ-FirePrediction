@@ -10,8 +10,10 @@ async function focosDict(paths){
   const promises = []
 
   paths.forEach(path => {
-    let readStream = createReadStream(path)
-    promises.push(streamToPromisifyDict(readStream))
+    if(/.csv$/.test(path)){
+      let readStream = createReadStream(path)
+      promises.push(streamToPromisifyDict(readStream))
+    }
   });
 
   const resolved = await Promise.all(promises)
