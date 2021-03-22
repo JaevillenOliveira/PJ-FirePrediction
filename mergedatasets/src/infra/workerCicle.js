@@ -27,7 +27,7 @@ async function run(){
 
       let newRow = ``
 
-      if(date > `2016` && date < `2021`){
+      if(date > `2011-01-01` && date < `2020-12-31`){
         let [,mes, dia] = row['Data Medicao'].split('-')
         newRow = JSON.stringify({
           'Data Medicao': `${dia}/${mes}`,
