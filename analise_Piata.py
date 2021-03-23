@@ -10,16 +10,16 @@ import seaborn as sns
 
 
 #leitura da base de dados
-df_Lencois = pd.read_csv('./dataset/mergedData/merged_dados_Lencois.csv')
+df = pd.read_csv('./dataset/mergedData/merged_PIATA_PRED.csv')
 
 #visualizando a distribuição da amostra
-ax = sns.countplot(x="has_Foco", data=df_Lencois)
+ax = sns.countplot(x="has_Foco", data=df)
 
 #salvando o que será previsto em outra variável
-previsao = df_Lencois['has_Foco'].values
+previsao = df['has_Foco'].values
 
 #removendo coluna de previsão
-df_Lencois = df_Lencois.drop(columns='has_Foco')
+df = df.drop(columns='has_Foco')
 
 #separando data por dia e mês
 '''
@@ -35,10 +35,10 @@ for i in range(len(df_Lencois)):
     df_Lencois['MES'][i] = float(data[i][1])
 '''
 #removendo coluna de data
-df_Lencois = df_Lencois.drop(columns='Data Medicao')
+df = df.drop(columns='Data Medicao')
 
 #valores para realizar a previsão
-previsores = df_Lencois.iloc[:,:].values
+previsores = df.iloc[:,:].values
 
 
 ################################## IGUALANDO QUANTIDADE DE AMOSTRAS #####################
