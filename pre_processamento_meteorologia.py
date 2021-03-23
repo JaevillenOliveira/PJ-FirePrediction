@@ -11,8 +11,8 @@ import math
 
 
 #leitura dados
-df_lencois = pd.read_csv('.//dataset//meteorologia//dados_Lencois.csv')
-df_piata = pd.read_csv('.//dataset//meteorologia//dados_Piata.csv')
+df_lencois = pd.read_csv('.//dataset//meteorologia//LENCOIS_PRED.csv')
+df_piata = pd.read_csv('.//dataset//meteorologia//PIATA_PRED.csv')
 
 #exibir quantidade de valores nulos em cada atributo
 df_lencois.isnull().sum() 
@@ -35,17 +35,17 @@ def tratamento(df):
     #calculando a média
     temperatura_media = df['TEMPERATURA MEDIA; DIARIA (AUT)(Â°C)'].mean()
     umidade_media = df['UMIDADE RELATIVA DO AR; MEDIA DIARIA (AUT)(%)'].mean()
-    vento_media = df['VENTO; VELOCIDADE MEDIA DIARIA (AUT)(m/s)'].mean()
+    #vento_media = df['VENTO; VELOCIDADE MEDIA DIARIA (AUT)(m/s)'].mean()
     
     #arredondando o valor
     temperatura_media = math.floor(temperatura_media)
     umidade_media = math.floor(umidade_media)
-    vento_media = math.floor(vento_media)
+    #vento_media = math.floor(vento_media)
 
     #preencher os valores faltantes com a média
     df['TEMPERATURA MEDIA; DIARIA (AUT)(Â°C)'].fillna(temperatura_media, inplace=True)
     df['UMIDADE RELATIVA DO AR; MEDIA DIARIA (AUT)(%)'].fillna(umidade_media, inplace=True)
-    df['VENTO; VELOCIDADE MEDIA DIARIA (AUT)(m/s)'].fillna(vento_media, inplace=True)
+    #df['VENTO; VELOCIDADE MEDIA DIARIA (AUT)(m/s)'].fillna(vento_media, inplace=True)
     
     
 tratamento(df_lencois)

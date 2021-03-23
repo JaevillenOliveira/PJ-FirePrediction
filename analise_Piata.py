@@ -37,14 +37,18 @@ for i in range(len(df_Lencois)):
 #removendo coluna de data
 df = df.drop(columns='Data Medicao')
 
-#valores para realizar a previsão
-previsores = df.iloc[:,:].values
-
 
 ################################## TRATAMENTO DE DADOS ##################################
 ################################## DADOS NULOS ##########################################
 
 #chamada da função da classe pre_processamento_meteorologia.py
+from pre_processamento_meteorologia import tratamento
+tratamento(df)
+
+
+#valores para realizar a previsão
+previsores = df.iloc[:,:].values
+
 
 ################################## IGUALANDO QUANTIDADE DE AMOSTRAS #####################
 ################################## NEARMISS #############################################
