@@ -41,6 +41,11 @@ df = df.drop(columns='Data Medicao')
 previsores = df.iloc[:,:].values
 
 
+################################## TRATAMENTO DE DADOS ##################################
+################################## DADOS NULOS ##########################################
+
+#chamada da função da classe pre_processamento_meteorologia.py
+
 ################################## IGUALANDO QUANTIDADE DE AMOSTRAS #####################
 ################################## NEARMISS #############################################
 #É um algoritmo de undersampling que consiste em reduzir de 
