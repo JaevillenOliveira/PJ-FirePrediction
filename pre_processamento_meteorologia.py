@@ -6,17 +6,7 @@ Created on Wed Feb 10 10:29:40 2021
 """
 
 
-import pandas as pd
 import math
-
-
-#leitura dados
-df_lencois = pd.read_csv('.//dataset//meteorologia//LENCOIS_PRED.csv')
-df_piata = pd.read_csv('.//dataset//meteorologia//PIATA_PRED.csv')
-
-#exibir quantidade de valores nulos em cada atributo
-df_lencois.isnull().sum() 
-df_piata.isnull().sum()
 
 
 #####################################TRATAMENTO DE DADOS############################
@@ -47,14 +37,7 @@ def tratamento(df):
     df['UMIDADE RELATIVA DO AR; MEDIA DIARIA (AUT)(%)'].fillna(umidade_media, inplace=True)
     #df['VENTO; VELOCIDADE MEDIA DIARIA (AUT)(m/s)'].fillna(vento_media, inplace=True)
     
-    
-tratamento(df_lencois)
-tratamento(df_piata)
-
-#exibir quantidade de valores nulos em cada atributo
-df_lencois.isnull().sum() 
-df_piata.isnull().sum()
-
+    return df
 
 
 

@@ -2,7 +2,7 @@
 """
 Created on Tue Mar  9 17:24:01 2021
 
-@author: Daniel Alves
+@author: Adlla Katarine e Daniel Alves
 """
 import pandas as pd
 import numpy as np
@@ -37,14 +37,16 @@ for i in range(len(df_Lencois)):
 #removendo coluna de data
 df = df.drop(columns='Data Medicao')
 
-#valores para realizar a previsão
-previsores = df.iloc[:,:].values
-
 
 ################################## TRATAMENTO DE DADOS ##################################
 ################################## DADOS NULOS ##########################################
+#chamada da função da classe pre_processamento_meteorologia.py para tratar valores nulos
+from pre_processamento_meteorologia import tratamento
+tratamento(df)
 
-#chamada da função da classe pre_processamento_meteorologia.py
+
+#valores para realizar a previsão
+previsores = df.iloc[:,:].values
 
 
 ################################## IGUALANDO QUANTIDADE DE AMOSTRAS #####################
@@ -100,18 +102,22 @@ df.insert(3, "has_Foco",previsao,True)
 profile = ProfileReport(df, title="Pandas Profiling Report")
 
 #gerando arquivo para vizualização
-profile.to_file("report_2011-2020.html")
+profile.to_file("report_2011-2020_Smote.html")
 
 
 ################################### CLASSIFICAÇÃO DA REDE ###################################
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, mean_absolute_error, accuracy_score,classification_report
 
 
 #dividindo dados em teste e treinamento 
 # Usou-se 25%(test_size = 0.25) como quantidade de atributos para teste e o restante para treinamento
-previsores_treinamento, previsores_teste, previsao_treinamento, previsao_teste = train_test_split(previsores, previsao, test_size=0.25, random_state=0)
+previsores_treinamento, previsores_teste, previsao_treinamento, previsao_teste = train_test_split(previsores, previsao, test_size=0.25, random_state=2)
+
+
+################################### REGRESSÃO LOGÍSTICA #####################################
+from sklearn.linear_model import LogisticRegression
+
 
 #atribuindo a função a uma variável para ser utilizada
 lr = LogisticRegression()
@@ -130,3 +136,29 @@ print (classification_report(previsao_teste, y_pred))
 
 #matriz de confusão
 print (pd.crosstab(previsao_teste, y_pred, rownames=['Real'], colnames=['Predito'], margins=True))
+
+
+##################################### ÁRVORE DE DECISÃO ########################################
+from sklearn.tree import DecisionTreeClassifier,export_graphviz
+
+
+#atribuindo a função a uma variável para ser utilizada
+clf = DecisionTreeClassifier()
+
+#treinando o modelo com os valores separados para treinamento
+clf = clf.fit(previsores_treinamento, previsao_treinamento)
+
+#verificando as features mais importantes para o modelo treinado
+clf.feature_importances_
+
+for feature, importancia in zip(df.columns,clf.feature_importances_):
+    print("{}:{}".format(feature, importancia))
+
+#realizando previção do dados para 'previsores_teste
+resultado = clf.predict(previsores_teste)
+
+#relatório de classificação
+print(classification_report(previsao_teste,resultado))
+
+print("acurácia training set: {:.3f}".format(clf.score(previsores_treinamento, previsao_treinamento)))
+print("acurácia testing set: {:.3f}".format(clf.score(previsores_teste, previsao_teste)))
