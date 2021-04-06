@@ -163,3 +163,20 @@ print(classification_report(previsao_teste,resultado))
 
 print("acurácia training set: {:.3f}".format(clf.score(previsores_treinamento, previsao_treinamento)))
 print("acurácia testing set: {:.3f}".format(clf.score(previsores_teste, previsao_teste)))
+
+
+##################################### NAIVE BAYES ########################################
+print('\n ******************** NAIVE BAYES ********************')
+from sklearn.naive_bayes import GaussianNB
+classificador = GaussianNB()
+classificador.fit(previsores_treinamento, previsao_treinamento)
+previsoes = classificador.predict(previsores_teste)
+
+#relatório de classificação
+print(classification_report(previsao_teste,previsoes))
+
+matrizNB = confusion_matrix(previsao_teste, previsoes)
+print("acurácia training set: {:.3f}".format(classificador.score(previsores_treinamento, previsao_treinamento)))
+print("acurácia testing set: {:.3f}".format(classificador.score(previsores_teste, previsao_teste)))
+
+
