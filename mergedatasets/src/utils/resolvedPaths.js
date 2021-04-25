@@ -1,18 +1,34 @@
-import path from "path";
+import path from 'path';
 
-const rootDirectory = path.resolve("");
+const rootDirectory = path.resolve('');
 
-const focosDirectory = path.resolve(rootDirectory, "..", "dataset", "focos");
+const focosDirectory = path.resolve(rootDirectory, '..', 'dataset', 'focos');
 
-const metereologiaDirectory = path.resolve(rootDirectory, "..", "dataset", "meteorologia");
+const metereologiaDirectory = path.resolve(
+  rootDirectory,
+  '..',
+  'dataset',
+  'meteorologia',
+  'OUTRAS_VARIAVEIS'
+);
 
 const outputDirectory = path.resolve(
   rootDirectory,
-  "..",
-  "dataset",
-  "mergedData"
+  '..',
+  'dataset',
+  'mergedData'
 );
 
-const resolvedWorkerCiclePath = path.resolve(rootDirectory, "src", "infra", "workerCicle.js")
+const resolvedWorkerCiclePath = path.resolve(
+  rootDirectory,
+  'src',
+  'infra',
+  'workerCicle.js'
+);
 
-export { focosDirectory, metereologiaDirectory, outputDirectory, resolvedWorkerCiclePath };
+export {
+  focosDirectory,
+  metereologiaDirectory,
+  outputDirectory,
+  resolvedWorkerCiclePath,
+};
